@@ -9,14 +9,15 @@ if (process.env.NODE_ENV !== 'production') {
 } else {
   app.use(require('choo-service-worker')())
 }
-app.use(function (state) {
+app.use(function (state, emitter) {
   // initialize state
   state.tasks = [
     {type: 'task',text: "pre filled task 1", id: "1"},
     {type: 'task',text: "pre filled task 2", id: "2"},
   ]
+  emitter.emit('render')
 })
-//app.use(require('./stores/Tasks'))
+app.use(require('./stores/Tasks'))
 
 
 app.route('/', require('./views/main'))
