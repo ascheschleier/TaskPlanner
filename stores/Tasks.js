@@ -14,9 +14,9 @@ function store (state, emitter) {
       }      
     })
 
-    emitter.on('task:remove', function (taskNumber) {
-      state.tasks[taskNumber].pop
-      state.taskCount -= 1      
+    emitter.on('task:remove', function (task) {
+      var taskID = task.id
+      state.tasks[taskID].pop()   
       emitter.emit(state.events.RENDER)
     })
   })
