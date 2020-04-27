@@ -1,6 +1,20 @@
+var serverRouter = require('server-router')
+var http = require('http')
 var css = require('sheetify')
 var choo = require('choo')
+var html = require('choo/html')
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
 //require('./mainMenuViews')
+
+var sRouter = serverRouter({ default: '/404' })
+sRouter.route('POST', '/dashboar', function (req, res, params) {
+  res.end('hello world')
+})
+http.createServer(sRouter.start()).listen()
+
+var loginView = require('./views/login')
 
 css('tachyons')
 
@@ -53,7 +67,14 @@ app.route('/video', require('./views/video'))
 /* Main menu routes */
 app.route('/', require('./views/main'))
 app.route('/login', require('./views/login'))
+/*
+app.route('/login', (state, emit) => {  
+    //passport.authenticate('local', { successRedirect: '/', failureRedirect: '/fail', failureFlash: true })
+    return loginView
+})
+*/
 app.route('/video', require('./views/video'))
+//app.route('/dashboard', require('./views/dashboard'))
 
 
 app.route('/*', require('./views/404'))

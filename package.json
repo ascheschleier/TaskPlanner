@@ -13,6 +13,9 @@
   "dependencies": {
     "choo": "^7.1.0",
     "choo-service-worker": "^3.0.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "server-router": "^6.1.0",
     "sheetify": "^8.0.0",
     "tachyons": "^4.11.1"
   },
