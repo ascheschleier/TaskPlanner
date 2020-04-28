@@ -25,37 +25,49 @@ function view (state, emit) {
       <main class="pa3 cf center">
         <section class="fl w-100 pa2">
           <h2>Login</h2>
-          <form action="/login" method="post">
-            <div>
-                <label>Username:</label>
-                <input type="text" name="username"/>
-            </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" name="password"/>
-            </div>
-            <div>
-                <input type="submit" value="Log In"/>
-            </div>
-        </form>
-
-        <!-- choo form C/P -->
-        <form id="login" action="/dashboard">
-            <label for="username">username</label>
-            <input id="username" name="username" type="text">
-            <label for="password">password</label>
-            <input id="password" name="password" type="password">
+          <form id="login" onsubmit=${onsubmit}>
+            <label for="username">
+            username
+            </label>
+            <input id="username" name="username"
+            type="text"
+            required
+            pattern=".{1,36}"
+            title="Username must be between 1 and 36 characters long."
+            >
+            <label for="password">
+            password
+            </label>
+            <input id="password" name="password"
+            type="password"
+            required
+            >
             <input type="submit" value="Login">
         </form>
-
-        
         </section>
       </main>
     </body>
-  `
- 
+    `
+    
+    function onsubmit (e) {                                             
+        e.preventDefault()
+        var form = e.currentTarget
+        var data = new FormData(form)                                       
+        var headers = new Headers({ 'Content-Type': 'application/json' })   
+        var body = {}
+        for (var pair of data.entries()) body[pair[0]] = pair[1]            
+        body = JSON.stringify(body)                                         
+        fetch('/', { method: 'POST', body, headers })              
+        .then(res => {
+            if (!res.ok) return console.log('oh no!')
+            console.log('request ok \o/')
+        })
+        .catch(err => console.log('oh no!'))
+    }
+    
 }
 
+/*
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function(err, user) {
@@ -70,3 +82,4 @@ passport.use(new LocalStrategy(
     });
   }
 ));
+*/

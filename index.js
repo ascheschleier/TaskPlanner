@@ -1,18 +1,8 @@
-var serverRouter = require('server-router')
-var http = require('http')
 var css = require('sheetify')
 var choo = require('choo')
 var html = require('choo/html')
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
 
 //require('./mainMenuViews')
-
-var sRouter = serverRouter({ default: '/404' })
-sRouter.route('POST', '/dashboar', function (req, res, params) {
-  res.end('hello world')
-})
-http.createServer(sRouter.start()).listen()
 
 var loginView = require('./views/login')
 
