@@ -1,12 +1,13 @@
 {
-  "name": "TaskPlaner",
+  "name": "taskplaner",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "bankai build index.js",
+    "build": "bankai build server.js",
     "create": "choo-scaffold",
     "inspect": "bankai inspect index.js",
-    "start": "bankai start index.js",
+    "start": "bankai start server.js",
+    "loud": "bankai -d start server.js",
     "test": "standard && npm run test-deps",
     "test-deps": "dependency-check . && dependency-check . --extra --no-dev -i tachyons"
   },
@@ -17,7 +18,7 @@
     "passport-local": "^1.0.0",
     "server-router": "^6.1.0",
     "sheetify": "^8.0.0",
-    "tachyons": "^4.11.1"
+    "tachyons": "^4.12.0"
   },
   "devDependencies": {
     "bankai": "^9.15.3",
