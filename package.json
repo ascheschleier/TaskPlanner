@@ -6,7 +6,7 @@
     "build": "bankai build server.js",
     "create": "choo-scaffold",
     "inspect": "bankai inspect index.js",
-    "start": "bankai start server.js",
+    "start": "bankai start frontend/index.js",
     "loud": "bankai -d start server.js",
     "test": "standard && npm run test-deps",
     "test-deps": "dependency-check . && dependency-check . --extra --no-dev -i tachyons"

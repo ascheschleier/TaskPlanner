@@ -1,6 +1,10 @@
 # TaskPlaner
 Task Planner
 
+## Node server
+
+start with `node server.js` to access backend API features
+
 ## Commands
 Command                | Description                                      |
 -----------------------|--------------------------------------------------|

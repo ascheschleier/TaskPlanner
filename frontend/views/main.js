@@ -1,5 +1,6 @@
 var html = require('choo/html')
 
+var Task = require('../components/tasks.js')
 // import template
 var tasks = require('../components/tasks.js')
 var Menu = require('../components/menu/menuWrapper')
@@ -13,10 +14,9 @@ module.exports = view
 function view (state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
+
+  //createTasks ()
   //tasks.bind(null, handleDelete )
-
-
-
 
   return html`
     <body class="code lh-copy" style="max-width:650px; margin:0 auto;">
@@ -36,8 +36,9 @@ function view (state, emit) {
 
           <p> 
             Tasks: <br>
-        
             ${state.tasks.map(tasks)}
+
+            
 
           </p>
           <p>
@@ -56,11 +57,18 @@ function view (state, emit) {
   function handleClick () {
     var task = document.getElementById("task_input").value
     emit('task:add', task)
+  } 
+
+  function createTasks () {
+    for(let task of state.tasks) {
+        new Task();
+    }
   }
 
-
-  function handleDelete (task) {
-    emit('task:remove', task)
+  function viewTasks () {
+    for(let task of state.tasks) {
+       Task
+    }
   }
- 
+    
 }

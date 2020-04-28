@@ -35,12 +35,12 @@ app.use(function (state, emitter) {
         calledRoute.toString()
         var entryRoute = entry.route
         entryRoute.toString()
-        console.log(`Matching with ${entry.route}`) 
+        //console.log(`Matching with ${entry.route}`) 
         if(calledRoute === entry.route) {
-            console.log(`Match found, setting ${entry.route} active`) 
+            //console.log(`Match found, setting ${entry.route} active`) 
             entry.active = true
         } else {
-            console.log(`${calledRoute} does not match ${entry.route}`)
+            //console.log(`${calledRoute} does not match ${entry.route}`)
             entry.active = false
         }
     }

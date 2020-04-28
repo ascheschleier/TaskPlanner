@@ -1,6 +1,4 @@
 var html = require('choo/html')
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
 
 // import template
 var tasks = require('../components/tasks.js')
@@ -48,7 +46,7 @@ function view (state, emit) {
       </main>
     </body>
     `
-    /*
+    
     function onsubmit (e) {                                             
         e.preventDefault()
         var form = e.currentTarget
@@ -57,29 +55,12 @@ function view (state, emit) {
         var body = {}
         for (var pair of data.entries()) body[pair[0]] = pair[1]            
         body = JSON.stringify(body)                                         
-        fetch('/', { method: 'POST', body, headers })              
+        fetch('/login', { method: 'POST', body, headers })              
         .then(res => {
             if (!res.ok) return console.log('oh no!')
-            console.log('request ok \o/')
+            console.log('request ok \\o/')
         })
         .catch(err => console.log('oh no!'))
     }
-    */
+    
 }
-
-/*
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-*/
