@@ -23,9 +23,20 @@ app.use(function (state, emitter) {
 
   state.mainMenuRoutes = [
     {route: '/',active: false, title: 'Home'},
-    {route: '/login',active: false, title: 'Login' },
-    {route: '/video',active: false, title: 'Video Chat' },
+    {route: '/user',active: false, title: 'User' },
+    {route: '/settings',active: false, title: 'Settings' },
+    {route: '/myplatform',active: false, title: 'myplatform' },
+    {route: '/forum',active: false, title: 'Forum' },
+    {route: '/earn',active: false, title: 'Earn GCA$Y Tokens' },
+    {route: '/partners',active: false, title: 'Partners' },
+    {route: '/chat',active: false, title: 'Video Chat' },
+    {route: '/faculty',active: false, title: 'Faculty' },
+    {route: '/students',active: false, title: 'Students' },
+    {route: '/staff',active: false, title: 'GCAS Team' },
+    {route: '/register',active: false, title: 'Register new user' },
   ]
+
+  state.userLoggedin = false
  
   emitter.on('navigate', () => {               
     console.log(`Navigated to ${state.route}`) 
@@ -48,26 +59,35 @@ app.use(function (state, emitter) {
 })
 
 app.use(require('./stores/Tasks'))
+app.use(require('./stores/user'))
 
 /* Main menu routes */
 app.route('/', require('./views/main'))
 app.route('/login', require('./views/login'))
 app.route('/video', require('./views/video'))
+app.route('/register', require('./views/register'))
 
-/* Main menu routes */
-app.route('/', require('./views/main'))
-app.route('/login', require('./views/login'))
+app.route('/*', require('./views/404'))
+
+app.use(function (state, emitter) {
+  
+  if(!state.user.loggedIn) {
+    emitter.emit('pushState', '/login')
+    //emitter.emit('log', 'bar')
+    emitter.emit('render')
+  }
+})
+
+
+
+
+
 /*
 app.route('/login', (state, emit) => {  
     //passport.authenticate('local', { successRedirect: '/', failureRedirect: '/fail', failureFlash: true })
     return loginView
 })
 */
-app.route('/video', require('./views/video'))
 //app.route('/dashboard', require('./views/dashboard'))
-
-
-app.route('/*', require('./views/404'))
-
 
 module.exports = app.mount('body')
