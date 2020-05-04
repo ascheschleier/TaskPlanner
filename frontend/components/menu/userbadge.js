@@ -2,7 +2,7 @@
 var html = require('choo/html')
 
 module.exports = function (state, emit) {
-  if(state.user.loggedIn) {
+  if (state.user.loggedIn) {
     return html`
       <div class="userBadge v-mid dtc">
         Hi ${state.user.username}! <a href="#" onclick="${logout}">logout</a>
@@ -16,9 +16,7 @@ module.exports = function (state, emit) {
     `
   }
 
-  
-
-  function logout(){
+  function logout () {
     emit('user:logout')
   }
 }

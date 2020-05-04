@@ -4,8 +4,6 @@ var loggedInCheck = require('../components/loggedInCheck')
 var Menu = require('../components/menu/menuWrapper')
 var mainLink = require('../components/mainLink')
 
-
-
 var TITLE = 'GCAS - App'
 
 module.exports = view
@@ -28,5 +26,5 @@ function view (state, emit) {
         </section>   
       </main>
     </body>
-  `    
+  `
 }

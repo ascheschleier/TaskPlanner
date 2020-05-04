@@ -5,8 +5,6 @@ var Task = require('../components/tasks.js')
 var tasks = require('../components/tasks.js')
 var Menu = require('../components/menu/menuWrapper')
 
-
-
 var TITLE = 'TaskPlaner - main'
 
 module.exports = view
@@ -14,9 +12,8 @@ module.exports = view
 function view (state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
-
-  //createTasks ()
-  //tasks.bind(null, handleDelete )
+  // createTasks ()
+  // tasks.bind(null, handleDelete )
 
   return html`
     <body class="code lh-copy" style="max-width:650px; margin:0 auto;">
@@ -55,20 +52,19 @@ function view (state, emit) {
   `
 
   function handleClick () {
-    var task = document.getElementById("task_input").value
+    var task = document.getElementById('task_input').value
     emit('task:add', task)
-  } 
+  }
 
   function createTasks () {
-    for(let task of state.tasks) {
-        new Task();
+    for (const task of state.tasks) {
+      new Task()
     }
   }
 
   function viewTasks () {
-    for(let task of state.tasks) {
-       Task
+    for (const task of state.tasks) {
+      Task
     }
   }
-    
 }

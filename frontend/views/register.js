@@ -3,7 +3,6 @@ var html = require('choo/html')
 // import templates
 var Menu = require('../components/menu/menuWrapper')
 
-
 var TITLE = 'Register - main'
 
 module.exports = view
@@ -49,36 +48,36 @@ function view (state, emit) {
       </main>
     </body>
     `
-    
-    function onsubmit (e) {                                             
-        e.preventDefault()
-        var form = e.currentTarget
-        var data = new FormData(form)                                       
-        var headers = new Headers({ 'Content-Type': 'application/json' })   
-        var body = {}
-        for (var pair of data.entries()) body[pair[0]] = pair[1]            
-        body = JSON.stringify(body)                                         
-        fetch('/createuser', { method: 'POST', body, headers })              
-        .then(res => {
-            if (!res.ok){
-              if(res.status === 412){
-                displayErrors(res.statusText);
-                return 
-              }
-              return console.log('oh no!')
-            } 
-            console.log('request ok \\o/')
-            state.redirect = true
-            state.redirectTaget = '/registered'
-            emit('user:login', res.statusText)
-        })
-        .catch(err => console.log('oh no!')+" "+JSON.stringify(err))
-    }
-    
-  function displayErrors(msg){
+
+  function onsubmit (e) {
+    e.preventDefault()
+    var form = e.currentTarget
+    var data = new FormData(form)
+    var headers = new Headers({ 'Content-Type': 'application/json' })
+    var body = {}
+    for (var pair of data.entries()) body[pair[0]] = pair[1]
+    body = JSON.stringify(body)
+    fetch('/createuser', { method: 'POST', body, headers })
+      .then(res => {
+        if (!res.ok) {
+          if (res.status === 412) {
+            displayErrors(res.statusText)
+            return
+          }
+          return console.log('oh no!')
+        }
+        console.log('request ok \\o/')
+        state.redirect = true
+        state.redirectTaget = '/registered'
+        emit('user:login', res.statusText)
+      })
+      .catch(err => console.log('oh no!') + ' ' + JSON.stringify(err))
+  }
+
+  function displayErrors (msg) {
     var errorField = document.getElementsByClassName('error-field')[0]
-    errorField.classList.remove('js-hide');       
+    errorField.classList.remove('js-hide')
     errorField.innerHTML = msg
-    console.log('msg') 
+    console.log('msg')
   }
 }

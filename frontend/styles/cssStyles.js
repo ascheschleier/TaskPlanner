@@ -1,7 +1,7 @@
 const css = require('sheetify')
 
 module.exports = function () {
- return css`
+  return css`
     .settings_link {
       max-width: 30px;
       display: inline-block;

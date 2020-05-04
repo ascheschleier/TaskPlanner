@@ -4,7 +4,6 @@ var html = require('choo/html')
 var tasks = require('../components/tasks.js')
 var Menu = require('../components/menu/menuWrapper')
 
-
 var TITLE = 'VIDEO - main'
 
 module.exports = view
@@ -12,10 +11,7 @@ module.exports = view
 function view (state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
-  //tasks.bind(null, handleDelete )
-
-
-
+  // tasks.bind(null, handleDelete )
 
   return html`
     <body class="code lh-copy" style="max-width:650px; margin:0 auto;">
@@ -30,5 +26,4 @@ function view (state, emit) {
       </main>
     </body>
   `
- 
 }

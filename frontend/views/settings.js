@@ -3,8 +3,6 @@ var html = require('choo/html')
 var loggedInCheck = require('../components/loggedInCheck')
 var Menu = require('../components/menu/menuWrapper')
 
-
-
 var TITLE = 'GCAS - Settings'
 
 module.exports = view
@@ -14,8 +12,8 @@ function view (state, emit) {
   console.log(state.params)
   loggedInCheck(state, emit)
 
-  //createTasks ()
-  //tasks.bind(null, handleDelete )
+  // createTasks ()
+  // tasks.bind(null, handleDelete )
 
   return html`
     <body class="code lh-copy" style="max-width:650px; margin:0 auto;">

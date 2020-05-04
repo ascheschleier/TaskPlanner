@@ -3,8 +3,6 @@ var html = require('choo/html')
 var loggedInCheck = require('../components/loggedInCheck')
 var Menu = require('../components/menu/menuWrapper')
 
-
-
 var TITLE = 'GCAS - Thanks for registering!'
 
 module.exports = view
@@ -13,8 +11,8 @@ function view (state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
   loggedInCheck(state, emit)
 
-  //createTasks ()
-  //tasks.bind(null, handleDelete )
+  // createTasks ()
+  // tasks.bind(null, handleDelete )
 
   return html`
     <body class="code lh-copy" style="max-width:650px; margin:0 auto;">
@@ -28,5 +26,5 @@ function view (state, emit) {
         </section>   
       </main>
     </body>
-  `    
+  `
 }

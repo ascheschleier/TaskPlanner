@@ -2,8 +2,8 @@
 var html = require('choo/html')
 
 module.exports = function (menuEntry) {
-    var route = menuEntry.route
-    var title = menuEntry.title
+  var route = menuEntry.route
+  var title = menuEntry.title
 
   // create html template
   return html`

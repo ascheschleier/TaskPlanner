@@ -7,18 +7,18 @@ module.exports = class Task extends Nanocomponent {
     this.local = state.components[id] = {}
   }
 
-  load(task){
+  load (task) {
     this.local.type = task.type
     this.local.text = task.text
     this.local.id = task.id
-    console.log('task component loaded: '+ this.local.id)
+    console.log('task component loaded: ' + this.local.id)
   }
 
-  view(state, emit) {
+  view (state, emit) {
     // create html template
 
-    console.log('task view: '+ this.local.id)
-    
+    console.log('task view: ' + this.local.id)
+
     return html`
       <li class="task_${this.local.id}" id="${this.local.id}"><span>${this.local.text}</span> 
       <span class="delete-wrapper">
@@ -28,9 +28,9 @@ module.exports = class Task extends Nanocomponent {
     `
 
     function handleDelete (e) {
-        var id = e.currentTarget.parentNode.parentNode.id
-        console.log(id)
-        emit('task:remove', id)
+      var id = e.currentTarget.parentNode.parentNode.id
+      console.log(id)
+      emit('task:remove', id)
     }
-  }  
+  }
 }

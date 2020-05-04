@@ -5,7 +5,6 @@ var tasks = require('../components/tasks.js')
 var Menu = require('../components/menu/menuWrapper')
 var statusMsg = require('../components/statusMsg')
 
-
 var TITLE = 'LOGIN - main'
 
 module.exports = view
@@ -13,10 +12,7 @@ module.exports = view
 function view (state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
-  //tasks.bind(null, handleDelete )
-
-
-
+  // tasks.bind(null, handleDelete )
 
   return html`
     <body class="code lh-copy" style="max-width:650px; margin:0 auto;">
@@ -60,26 +56,25 @@ function view (state, emit) {
       </main>
     </body>
     `
-    
-    function onsubmit (e) {                                             
-        e.preventDefault()
-        var form = e.currentTarget
-        var data = new FormData(form)                                       
-        var headers = new Headers({ 'Content-Type': 'application/json' })   
-        var body = {}
-        for (var pair of data.entries()) body[pair[0]] = pair[1]            
-        body = JSON.stringify(body)                                         
-        fetch('/login', { method: 'POST', body, headers })              
-        .then(res => {
-            if (!res.ok) return console.log('oh no! '+res.headers.statusMessage)
-            console.log('request ok \\o/')
-            //console.log(res.headers["msg"])
-            //console.log(res.headers["usr"])
-            // ToDo: get the username back as statusMessage, quick workaround:
-            var name = JSON.parse(body)
-            emit('user:login' , name.username)
-        })
-        .catch(err => console.log('oh no!'))
-    }
-    
+
+  function onsubmit (e) {
+    e.preventDefault()
+    var form = e.currentTarget
+    var data = new FormData(form)
+    var headers = new Headers({ 'Content-Type': 'application/json' })
+    var body = {}
+    for (var pair of data.entries()) body[pair[0]] = pair[1]
+    body = JSON.stringify(body)
+    fetch('/login', { method: 'POST', body, headers })
+      .then(res => {
+        if (!res.ok) return console.log('oh no! ' + res.headers.statusMessage)
+        console.log('request ok \\o/')
+        // console.log(res.headers["msg"])
+        // console.log(res.headers["usr"])
+        // ToDo: get the username back as statusMessage, quick workaround:
+        var name = JSON.parse(body)
+        emit('user:login', name.username)
+      })
+      .catch(err => console.log('oh no!'))
+  }
 }
