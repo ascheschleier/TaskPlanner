@@ -10,7 +10,12 @@ function store (state, emitter) {
     emitter.on('user:login', (name) => {     
       state.user.username = name
       state.user.loggedIn = true
-      emitter.emit('pushState', '/')
+      if(state.redirect) {
+        state.redirect = false
+        emitter.emit('pushState', state.redirectTarget)
+      } else {
+        emitter.emit('pushState', '/')      
+      }
       emitter.emit('render')
     })
 

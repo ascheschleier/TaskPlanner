@@ -1,6 +1,7 @@
 var css = require('sheetify')
 var choo = require('choo')
 var html = require('choo/html')
+const styles = require('./styles/cssStyles')
 
 //require('./mainMenuViews')
 
@@ -9,11 +10,16 @@ var loginView = require('./views/login')
 css('tachyons')
 
 var app = choo()
+app.use(styles)
 if (process.env.NODE_ENV !== 'production') {
   app.use(require('choo-devtools')())
 } else {
   app.use(require('choo-service-worker')())
 }
+
+app.use(require('./stores/Tasks'))
+app.use(require('./stores/user'))
+
 app.use(function (state, emitter) {
   // initialize state
   state.tasks = [
@@ -36,10 +42,18 @@ app.use(function (state, emitter) {
     {route: '/register',active: false, title: 'Register new user' },
   ]
 
-  state.userLoggedin = false
- 
   emitter.on('navigate', () => {               
     console.log(`Navigated to ${state.route}`) 
+
+    // thats not the way to go:
+    /*
+    if(!state.user.loggedIn) {
+      emitter.emit('pushState', '/login')
+      //emitter.emit('log', 'bar')
+      emitter.emit('render')
+      return
+    }
+    */
 
     for(let entry of state.mainMenuRoutes) {
         var calledRoute = '/'+state.route
@@ -56,19 +70,28 @@ app.use(function (state, emitter) {
         }
     }
   })
+
+  emitter.on('needToLogIn', function () {
+    emitter.emit('pushState', '/login')
+    //emitter.on('DOMCONTENTLOADED', emitter.emit('render')) 
+    emitter.on('DOMContentLoaded', function () {
+      emitter.emit('render')
+    })    
+  })
 })
 
-app.use(require('./stores/Tasks'))
-app.use(require('./stores/user'))
 
 /* Main menu routes */
 app.route('/', require('./views/main'))
 app.route('/login', require('./views/login'))
 app.route('/video', require('./views/video'))
 app.route('/register', require('./views/register'))
+app.route('/registered', require('./views/registered'))
+app.route('/settings/:user', require('./views/settings'))
 
 app.route('/*', require('./views/404'))
 
+/*
 app.use(function (state, emitter) {
   
   if(!state.user.loggedIn) {
@@ -77,10 +100,7 @@ app.use(function (state, emitter) {
     emitter.emit('render')
   }
 })
-
-
-
-
+*/
 
 /*
 app.route('/login', (state, emit) => {  

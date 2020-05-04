@@ -108,7 +108,8 @@ router.route('POST', '/createuser', function (req, res, params) {
       var userNameExists = contains(userDB.users, "username", query.username)
       if(userNameExists) {
         res.statusCode = 412
-        res.end("Username already exists")
+        res.statusMessage = "Username already exists: "+ query.username;
+        res.end()
         console.log("Username already exists")
         return false
       } 
@@ -120,7 +121,8 @@ router.route('POST', '/createuser', function (req, res, params) {
      // console.log(users)
       fs.writeFile('users.json',  JSON.stringify(userDB) ,() => {
           res.statusCode = 200
-          res.end("new user added")
+          res.statusMessage = query.username;
+          res.end()
           console.log("new user added: "+ query.username)
           return true
       })
@@ -199,6 +201,11 @@ function contains(arr, key, val) {
     return false
 }
 
-http.createServer(router.start()).listen(8080, function () {
+const options = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+};
+
+http.createServer(options, router.start()).listen(8080, function () {  
   console.log('listening on port 8080')
 })

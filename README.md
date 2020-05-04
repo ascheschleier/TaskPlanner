@@ -3,7 +3,7 @@ Task Planner
 
 ## Node server
 
-start with `node server.js` to access backend API features
+start with `node server.js` or `nodemon --ignore '*.json'` to access backend API features
 
 ## Commands
 Command                | Description                                      |

@@ -1,8 +1,9 @@
 var html = require('choo/html')
 
-// import template
+// import components
 var tasks = require('../components/tasks.js')
 var Menu = require('../components/menu/menuWrapper')
+var statusMsg = require('../components/statusMsg')
 
 
 var TITLE = 'LOGIN - main'
@@ -21,6 +22,7 @@ function view (state, emit) {
     <body class="code lh-copy" style="max-width:650px; margin:0 auto;">
       ${Menu(state, emit)}
       <main class="pa3 cf center">
+        ${statusMsg(state, emit)}
         <section class="fl w-100 pa2">
           <h2 class="measure center">Login</h2>
 

@@ -15,7 +15,7 @@ function view (state, emit) {
     <body class="code lh-copy" style="max-width:650px; margin:0 auto;">
       ${Menu(state, emit)}
       <main class="pa3 cf center">
-
+        <div id="temporaryField"></div>
         <section class="fl w-100 pa2">
           <h2>Register</h2>
           <form id="register" onsubmit=${onsubmit}>
@@ -42,6 +42,7 @@ function view (state, emit) {
                 <input class="b pa2 input-reset ba bg-transparent" type="password" name="password"  id="password">
               </div>
             </fieldset>
+            <div class="error-field js-hide f4 fw6 db red"></div>
             <div class="mt3"><input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type="submit" value="Sign Up"></div>
           </form>
         </section>
@@ -61,18 +62,23 @@ function view (state, emit) {
         .then(res => {
             if (!res.ok){
               if(res.status === 412){
-                alreadyExists();
-                return console.log('username already exists')    
+                displayErrors(res.statusText);
+                return 
               }
               return console.log('oh no!')
             } 
             console.log('request ok \\o/')
-            console.log(JSON.stringify(res.headers))
+            state.redirect = true
+            state.redirectTaget = '/registered'
+            emit('user:login', res.statusText)
         })
         .catch(err => console.log('oh no!')+" "+JSON.stringify(err))
     }
     
-  function alreadyExists(){
-    document.getElementById("username").title = "Username already taken!"
+  function displayErrors(msg){
+    var errorField = document.getElementsByClassName('error-field')[0]
+    errorField.classList.remove('js-hide');       
+    errorField.innerHTML = msg
+    console.log('msg') 
   }
 }
